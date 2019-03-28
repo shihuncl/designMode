@@ -10,6 +10,9 @@ public class LazyDoubleSingleton {
 
     private  LazyDoubleSingleton(){}
 
+
+
+
     public  static  LazyDoubleSingleton getInstance(){
         //防止重复创建
         if(lazy ==null){
