@@ -5,6 +5,7 @@ import javax.tools.StandardJavaFileManager;
 import javax.tools.ToolProvider;
 import java.io.File;
 import java.io.FileWriter;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 
 /**
@@ -33,9 +34,19 @@ public class GPProxy {
             StandardJavaFileManager manager=compiler.getStandardFileManager(null,null,null);
             Iterable iterable=manager.getJavaFileObjects(f);
 
+            JavaCompiler.CompilationTask task=compiler.getTask(null, manager,
+                    null, null, null, iterable);
+            task.call();
+            manager.close();
+            Class proxyClass=loader.findClass("$Proxy0");
+            Constructor  constructor=proxyClass.getConstructor(GPInvocationHandler.class);
+            System.out.println(src);
+            return constructor.newInstance(h);
+
 
         }catch (Exception e){
 
+            e.printStackTrace();
         }
         return  null;
     }
