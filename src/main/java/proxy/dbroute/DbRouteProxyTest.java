@@ -14,7 +14,8 @@ public class DbRouteProxyTest {
             Date date=sdf.parse("2017/02/01");
             Order order=new Order();
             order.setCreateTime(date.getTime());
-            IOrderService orderService=new OrderServiceStaticProxy(new OrderService());
+            //IOrderService orderService=new OrderServiceStaticProxy(new OrderService());
+            IOrderService orderService=(IOrderService)new OrderServiceDynamicProxy().getInstace(new OrderService());
             orderService.createOrder(order);
 
         } catch (ParseException e) {

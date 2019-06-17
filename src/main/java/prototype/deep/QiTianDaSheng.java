@@ -21,6 +21,8 @@ public class QiTianDaSheng extends Monkey implements Cloneable,Serializable {
 
     public Object deepClone(){
         try {
+            //内存中完成操作，对象读写，是通过字节码直接操作
+            //序列化操作类似
             ByteArrayOutputStream bos=new ByteArrayOutputStream();
             ObjectOutputStream os=new ObjectOutputStream(bos);
             os.writeObject(this);
